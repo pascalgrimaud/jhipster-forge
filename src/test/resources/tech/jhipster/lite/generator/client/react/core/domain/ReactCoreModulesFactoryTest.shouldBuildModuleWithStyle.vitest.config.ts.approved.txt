@@ -29,11 +29,7 @@ export default defineConfig({
         100: true,
       },
       include: ['src/main/webapp/**/*.ts?(x)'],
-      exclude: [
-        ...configDefaults.coverage.exclude as string[],
-        'src/main/webapp/app/injections.ts',
-        'src/main/webapp/app/index.tsx',
-      ],
+      exclude: [...(configDefaults.coverage.exclude as string[]), 'src/main/webapp/app/injections.ts', 'src/main/webapp/app/index.tsx'],
       provider: 'istanbul',
       reportsDirectory: 'target/test-results/',
       reporter: ['html', 'json-summary', 'text', 'text-summary', 'lcov', 'clover'],
