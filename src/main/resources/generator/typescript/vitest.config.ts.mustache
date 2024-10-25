@@ -28,9 +28,7 @@ export default defineConfig({
         100: true,
       },
       include: ['src/main/webapp/**/*.ts?(x)'],
-      exclude: [
-        ...configDefaults.coverage.exclude as string[],
-      ],
+      exclude: [...(configDefaults.coverage.exclude as string[])],
       provider: 'istanbul',
       reportsDirectory: '{{projectBuildDirectory}}/test-results/',
       reporter: ['html', 'json-summary', 'text', 'text-summary', 'lcov', 'clover'],

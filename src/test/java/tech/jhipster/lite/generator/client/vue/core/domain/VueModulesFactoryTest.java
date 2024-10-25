@@ -79,7 +79,7 @@ class VueModulesFactoryTest {
             """
         )
       .and()
-      .hasPrefixedFiles("", "eslint.config.js", "tsconfig.build.json", "vite.config.ts", "vitest.config.ts")
+      .hasPrefixedFiles("", "eslint.config.js", "tsconfig.build.json", "vite.config.ts")
       .hasFile("tsconfig.json")
         .matchingSavedSnapshot()
         .and()

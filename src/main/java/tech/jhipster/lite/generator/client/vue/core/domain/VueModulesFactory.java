@@ -185,17 +185,19 @@ public class VueModulesFactory {
           .add(lineAfterRegex("from 'vitest/config';"), "import vue from '@vitejs/plugin-vue';")
           .add(text("plugins: ["), "plugins: [vue(), ")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/**/*.component.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/router.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/injections.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/main.ts"))
+          .add(vitestCoverageExclusion("src/main/webapp/**/*.component.ts"))
+          .add(vitestCoverageExclusion("src/main/webapp/app/router.ts"))
+          .add(vitestCoverageExclusion("src/main/webapp/app/injections.ts"))
+          .add(vitestCoverageExclusion("src/main/webapp/app/main.ts"))
         .and();
     //@formatter:on
   }
 
-  private static MandatoryReplacer vitestCoverageExclusion(JHipsterModuleProperties properties, String filePattern) {
-    Indentation indentation = properties.indentation();
-    return new MandatoryReplacer(lineAfterRegex("configDefaults.coverage.exclude"), indentation.times(4) + "'" + filePattern + "',");
+  private static MandatoryReplacer vitestCoverageExclusion(String filePattern) {
+    return new MandatoryReplacer(
+      text("(configDefaults.coverage.exclude as string[])"),
+      "(configDefaults.coverage.exclude as string[])" + ", '" + filePattern + "'"
+    );
   }
 
   public JHipsterModule buildPiniaModule(JHipsterModuleProperties properties) {
