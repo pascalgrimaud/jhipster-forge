@@ -46,4 +46,11 @@ class JHipsterModulesResourcesTest {
 
     assertThat(resource.toString()).contains("JHipsterModuleResource[", "slug=dummy");
   }
+
+  @Test
+  void shouldBuildWithRankedResources() {
+    var resource = defaultModuleResourceBuilder().rank(JHLiteModuleRank.D).build();
+
+    assertThat(resource.rank()).isEqualTo(JHLiteModuleRank.D);
+  }
 }
