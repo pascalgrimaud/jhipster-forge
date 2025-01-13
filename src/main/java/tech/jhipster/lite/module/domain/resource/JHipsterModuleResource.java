@@ -14,6 +14,7 @@ public final class JHipsterModuleResource {
   private final JHipsterModuleApiDoc apiDoc;
   private final JHipsterModuleOrganization organization;
   private final JHipsterModuleTags tags;
+  private final String rank;
   private final JHipsterModuleFactory factory;
 
   private JHipsterModuleResource(JHipsterModuleResourceBuilder builder) {
@@ -24,6 +25,7 @@ public final class JHipsterModuleResource {
     apiDoc = builder.apiDoc;
     tags = builder.tags;
     organization = builder.organization;
+    rank = builder.rank;
     factory = builder.factory;
   }
 
@@ -60,6 +62,10 @@ public final class JHipsterModuleResource {
     return organization;
   }
 
+  public String rank() {
+    return rank;
+  }
+
   public JHipsterModuleFactory factory() {
     return factory;
   }
@@ -90,6 +96,7 @@ public final class JHipsterModuleResource {
 
     private JHipsterModuleSlugFactory slug;
     private JHipsterModuleApiDoc apiDoc;
+    private String rank;
     private JHipsterModuleFactory factory;
     private JHipsterModulePropertiesDefinition propertiesDefinition;
 
@@ -127,6 +134,13 @@ public final class JHipsterModuleResource {
     @Override
     public JHipsterModuleResourceFactoryBuilder tags(JHipsterModuleTags tags) {
       this.tags = tags;
+
+      return this;
+    }
+
+    @Override
+    public JHipsterModuleResourceFactoryBuilder rank(String rank) {
+      this.rank = rank;
 
       return this;
     }
@@ -176,6 +190,7 @@ public final class JHipsterModuleResource {
   }
 
   public interface JHipsterModuleResourceFactoryBuilder {
+    JHipsterModuleResourceFactoryBuilder rank(String rank);
     JHipsterModuleResource factory(JHipsterModuleFactory factory);
   }
 }

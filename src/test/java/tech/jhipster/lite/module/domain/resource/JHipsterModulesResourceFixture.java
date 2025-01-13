@@ -76,6 +76,7 @@ public final class JHipsterModulesResourceFixture {
     private JHipsterModuleFactory factory;
     private JHipsterModuleTags tags;
     private String feature;
+    private String rank;
 
     private final Collection<JHipsterModuleSlugFactory> moduleDependencies = new ArrayList<>();
     private final Collection<JHipsterFeatureSlugFactory> featureDependencies = new ArrayList<>();
@@ -130,6 +131,12 @@ public final class JHipsterModulesResourceFixture {
       return this;
     }
 
+    public JHipsterTestModuleResourceBuilder rank(String rank) {
+      this.rank = rank;
+
+      return this;
+    }
+
     public JHipsterModuleResource build() {
       return JHipsterModuleResource.builder()
         .slug(() -> slug)
@@ -137,6 +144,7 @@ public final class JHipsterModulesResourceFixture {
         .apiDoc(group, operation)
         .organization(buildOrganization())
         .tags(tags)
+        .rank(rank)
         .factory(factory);
     }
 
