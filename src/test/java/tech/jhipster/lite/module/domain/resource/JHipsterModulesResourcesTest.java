@@ -52,13 +52,13 @@ class JHipsterModulesResourcesTest {
   void shouldBuildWithRankedResources() {
     var resource = defaultModuleResourceBuilder().rank("S").build();
 
-    assertThat(resource.rank()).isEqualTo(Optional.of("S"));
+    assertThat(resource.rank()).isEqualTo(Optional.of(new JHipsterModuleRank("S")));
   }
 
   @Test
   void shouldBuildWithDefaultRankedResources() {
     var resource = defaultModuleResourceBuilder().build();
 
-    assertThat(resource.rank()).isEqualTo(Optional.of("D"));
+    assertThat(resource.rank()).isEqualTo(Optional.of(new JHipsterModuleRank("D")));
   }
 }
