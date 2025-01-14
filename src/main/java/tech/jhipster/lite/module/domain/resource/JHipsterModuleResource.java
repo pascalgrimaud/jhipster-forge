@@ -15,7 +15,7 @@ public final class JHipsterModuleResource {
   private final JHipsterModuleApiDoc apiDoc;
   private final JHipsterModuleOrganization organization;
   private final JHipsterModuleTags tags;
-  private final Optional<String> rank;
+  private final Optional<JHipsterModuleRank> rank;
   private final JHipsterModuleFactory factory;
 
   private JHipsterModuleResource(JHipsterModuleResourceBuilder builder) {
@@ -26,7 +26,7 @@ public final class JHipsterModuleResource {
     apiDoc = builder.apiDoc;
     tags = builder.tags;
     organization = builder.organization;
-    rank = Optional.ofNullable(builder.rank).or(() -> Optional.of("D"));
+    rank = Optional.ofNullable(builder.rank).or(() -> Optional.of(new JHipsterModuleRank("D")));
     factory = builder.factory;
   }
 
@@ -63,7 +63,7 @@ public final class JHipsterModuleResource {
     return organization;
   }
 
-  public Optional<String> rank() {
+  public Optional<JHipsterModuleRank> rank() {
     return rank;
   }
 
@@ -97,7 +97,7 @@ public final class JHipsterModuleResource {
 
     private JHipsterModuleSlugFactory slug;
     private JHipsterModuleApiDoc apiDoc;
-    private String rank;
+    private JHipsterModuleRank rank;
     private JHipsterModuleFactory factory;
     private JHipsterModulePropertiesDefinition propertiesDefinition;
 
@@ -140,7 +140,7 @@ public final class JHipsterModuleResource {
     }
 
     @Override
-    public JHipsterModuleResourceOptionalBuilder rank(String rank) {
+    public JHipsterModuleResourceOptionalBuilder rank(JHipsterModuleRank rank) {
       this.rank = rank;
 
       return this;
@@ -191,7 +191,11 @@ public final class JHipsterModuleResource {
   }
 
   public interface JHipsterModuleResourceOptionalBuilder {
-    JHipsterModuleResourceOptionalBuilder rank(String rank);
+    JHipsterModuleResourceOptionalBuilder rank(JHipsterModuleRank rank);
+
+    default JHipsterModuleResourceOptionalBuilder rank(String rank) {
+      return rank(new JHipsterModuleRank(rank));
+    }
 
     JHipsterModuleResource factory(JHipsterModuleFactory factory);
   }
