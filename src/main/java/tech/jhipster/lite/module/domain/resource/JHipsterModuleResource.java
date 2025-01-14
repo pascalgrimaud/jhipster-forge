@@ -26,7 +26,7 @@ public final class JHipsterModuleResource {
     apiDoc = builder.apiDoc;
     tags = builder.tags;
     organization = builder.organization;
-    rank = builder.rank.or(() -> Optional.of("D"));
+    rank = Optional.ofNullable(builder.rank).or(() -> Optional.of("D"));
     factory = builder.factory;
   }
 
@@ -97,7 +97,7 @@ public final class JHipsterModuleResource {
 
     private JHipsterModuleSlugFactory slug;
     private JHipsterModuleApiDoc apiDoc;
-    private Optional<String> rank;
+    private String rank;
     private JHipsterModuleFactory factory;
     private JHipsterModulePropertiesDefinition propertiesDefinition;
 
@@ -140,7 +140,7 @@ public final class JHipsterModuleResource {
     }
 
     @Override
-    public JHipsterModuleResourceOptionalBuilder rank(Optional<String> rank) {
+    public JHipsterModuleResourceOptionalBuilder rank(String rank) {
       this.rank = rank;
 
       return this;
@@ -191,7 +191,7 @@ public final class JHipsterModuleResource {
   }
 
   public interface JHipsterModuleResourceOptionalBuilder {
-    JHipsterModuleResourceOptionalBuilder rank(Optional<String> rank);
+    JHipsterModuleResourceOptionalBuilder rank(String rank);
 
     JHipsterModuleResource factory(JHipsterModuleFactory factory);
   }
