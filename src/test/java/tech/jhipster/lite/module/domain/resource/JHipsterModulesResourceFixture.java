@@ -138,14 +138,18 @@ public final class JHipsterModulesResourceFixture {
     }
 
     public JHipsterModuleResource build() {
-      return JHipsterModuleResource.builder()
+      JHipsterModuleResource.JHipsterModuleResourceOptionalBuilder builder = JHipsterModuleResource.builder()
         .slug(() -> slug)
         .propertiesDefinition(propertiesDefinition())
         .apiDoc(group, operation)
         .organization(buildOrganization())
-        .tags(tags)
-        .rank(rank)
-        .factory(factory);
+        .tags(tags);
+
+      if (rank != null) {
+        builder.rank(rank);
+      }
+
+      return builder.factory(factory);
     }
 
     private JHipsterModuleOrganization buildOrganization() {
