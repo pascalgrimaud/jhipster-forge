@@ -5,6 +5,7 @@ import static tech.jhipster.lite.module.domain.resource.JHipsterModulePropertyDe
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import tech.jhipster.lite.module.domain.JHipsterModuleFactory;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization.JHipsterModuleOrganizationBuilder;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleTags.JHipsterModuleTagsBuilder;
@@ -145,11 +146,7 @@ public final class JHipsterModulesResourceFixture {
         .organization(buildOrganization())
         .tags(tags);
 
-      if (rank != null) {
-        builder.rank(rank);
-      }
-
-      return builder.factory(factory);
+      return Optional.ofNullable(rank).map(builder::rank).orElse(builder).factory(factory);
     }
 
     private JHipsterModuleOrganization buildOrganization() {
