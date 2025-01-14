@@ -49,9 +49,9 @@ class JHipsterModulesResourcesTest {
 
   @Test
   void shouldBuildWithRankedResources() {
-    var resource = defaultModuleResourceBuilder().rank("D").build();
+    var resource = defaultModuleResourceBuilder().rank("S").build();
 
-    assertThat(resource.rank()).isEqualTo("D");
+    assertThat(resource.rank()).isEqualTo("S");
   }
 
   @Test
