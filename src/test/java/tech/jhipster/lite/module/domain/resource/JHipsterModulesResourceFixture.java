@@ -5,7 +5,6 @@ import static tech.jhipster.lite.module.domain.resource.JHipsterModulePropertyDe
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import tech.jhipster.lite.module.domain.JHipsterModuleFactory;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization.JHipsterModuleOrganizationBuilder;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleTags.JHipsterModuleTagsBuilder;
@@ -77,7 +76,7 @@ public final class JHipsterModulesResourceFixture {
     private JHipsterModuleFactory factory;
     private JHipsterModuleTags tags;
     private String feature;
-    private Optional<String> rank = Optional.empty();
+    private String rank;
 
     private final Collection<JHipsterModuleSlugFactory> moduleDependencies = new ArrayList<>();
     private final Collection<JHipsterFeatureSlugFactory> featureDependencies = new ArrayList<>();
@@ -133,7 +132,7 @@ public final class JHipsterModulesResourceFixture {
     }
 
     public JHipsterTestModuleResourceBuilder rank(String rank) {
-      this.rank = Optional.of(rank);
+      this.rank = rank;
 
       return this;
     }
