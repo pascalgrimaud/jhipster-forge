@@ -2,6 +2,7 @@ package tech.jhipster.lite.module.domain.resource;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
+import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import tech.jhipster.lite.module.domain.JHipsterModuleFactory;
 import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
@@ -14,7 +15,7 @@ public final class JHipsterModuleResource {
   private final JHipsterModuleApiDoc apiDoc;
   private final JHipsterModuleOrganization organization;
   private final JHipsterModuleTags tags;
-  private final String rank;
+  private final Optional<String> rank;
   private final JHipsterModuleFactory factory;
 
   private JHipsterModuleResource(JHipsterModuleResourceBuilder builder) {
@@ -25,7 +26,7 @@ public final class JHipsterModuleResource {
     apiDoc = builder.apiDoc;
     tags = builder.tags;
     organization = builder.organization;
-    rank = builder.rank;
+    rank = builder.rank.or(() -> Optional.of("D"));
     factory = builder.factory;
   }
 
@@ -62,7 +63,7 @@ public final class JHipsterModuleResource {
     return organization;
   }
 
-  public String rank() {
+  public Optional<String> rank() {
     return rank;
   }
 
@@ -96,7 +97,7 @@ public final class JHipsterModuleResource {
 
     private JHipsterModuleSlugFactory slug;
     private JHipsterModuleApiDoc apiDoc;
-    private String rank;
+    private Optional<String> rank;
     private JHipsterModuleFactory factory;
     private JHipsterModulePropertiesDefinition propertiesDefinition;
 
@@ -139,7 +140,7 @@ public final class JHipsterModuleResource {
     }
 
     @Override
-    public JHipsterModuleResourceFactoryBuilder rank(String rank) {
+    public JHipsterModuleResourceFactoryBuilder rank(Optional<String> rank) {
       this.rank = rank;
 
       return this;
@@ -190,7 +191,7 @@ public final class JHipsterModuleResource {
   }
 
   public interface JHipsterModuleResourceFactoryBuilder {
-    JHipsterModuleResourceFactoryBuilder rank(String rank);
+    JHipsterModuleResourceFactoryBuilder rank(Optional<String> rank);
     JHipsterModuleResource factory(JHipsterModuleFactory factory);
   }
 }
