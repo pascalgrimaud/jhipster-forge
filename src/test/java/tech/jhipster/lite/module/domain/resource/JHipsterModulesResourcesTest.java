@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static tech.jhipster.lite.module.domain.resource.JHipsterModulesResourceFixture.*;
 
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
@@ -45,5 +46,19 @@ class JHipsterModulesResourcesTest {
     var resource = defaultModuleResourceBuilder().slug("dummy").build();
 
     assertThat(resource.toString()).contains("JHipsterModuleResource[", "slug=dummy");
+  }
+
+  @Test
+  void shouldBuildWithRankedResources() {
+    var resource = defaultModuleResourceBuilder().rank("S").build();
+
+    assertThat(resource.rank()).isEqualTo(Optional.of(new JHipsterModuleRank("S")));
+  }
+
+  @Test
+  void shouldBuildWithDefaultRankedResources() {
+    var resource = defaultModuleResourceBuilder().build();
+
+    assertThat(resource.rank()).isEqualTo(Optional.of(new JHipsterModuleRank("D")));
   }
 }

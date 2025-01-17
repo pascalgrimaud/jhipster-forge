@@ -5,6 +5,7 @@ import static tech.jhipster.lite.module.domain.resource.JHipsterModulePropertyDe
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import tech.jhipster.lite.module.domain.JHipsterModuleFactory;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization.JHipsterModuleOrganizationBuilder;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleTags.JHipsterModuleTagsBuilder;
@@ -76,6 +77,7 @@ public final class JHipsterModulesResourceFixture {
     private JHipsterModuleFactory factory;
     private JHipsterModuleTags tags;
     private String feature;
+    private String rank;
 
     private final Collection<JHipsterModuleSlugFactory> moduleDependencies = new ArrayList<>();
     private final Collection<JHipsterFeatureSlugFactory> featureDependencies = new ArrayList<>();
@@ -130,14 +132,21 @@ public final class JHipsterModulesResourceFixture {
       return this;
     }
 
+    public JHipsterTestModuleResourceBuilder rank(String rank) {
+      this.rank = rank;
+
+      return this;
+    }
+
     public JHipsterModuleResource build() {
-      return JHipsterModuleResource.builder()
+      JHipsterModuleResource.JHipsterModuleResourceOptionalBuilder builder = JHipsterModuleResource.builder()
         .slug(() -> slug)
         .propertiesDefinition(propertiesDefinition())
         .apiDoc(group, operation)
         .organization(buildOrganization())
-        .tags(tags)
-        .factory(factory);
+        .tags(tags);
+
+      return Optional.ofNullable(rank).map(builder::rank).orElse(builder).factory(factory);
     }
 
     private JHipsterModuleOrganization buildOrganization() {
